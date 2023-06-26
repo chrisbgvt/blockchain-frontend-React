@@ -1,26 +1,84 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
 
+import { init, useConnectWallet } from "@web3-onboard/react";
+import injectedModule from "@web3-onboard/injected-wallets";
+// import { ethers } from "ethers";
+
+import Home from "./components/Home/Home";
+import Navbar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
+import Elections from './components/Elections/Elections';
+
+const rpcUrl = `http://127.0.0.1:8545`;
+
+const injected = injectedModule();
+
+// initialize Onboard
+init({
+    connect: {
+        autoConnectLastWallet: true,
+    },
+    wallets: [injected],
+    chains: [
+        {
+            id: "0x539",
+            token: "ETH",
+            label: "Custom RPC"
+            ,
+            rpcUrl,
+        },
+    ],
+    accountCenter: {
+        desktop: {
+            enabled: false
+        },
+        mobile: {
+            enabled: false
+        }
+    },
+});
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+
+    function handleConnect() {
+        connect();
+    }
+
+    function handleDisconnect() {
+        if (!wallet) {
+            return;
+        }
+
+        disconnect(wallet).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    return (
+        <div className="App">
+            <Navbar onDisconnect={handleDisconnect} />
+            <div className="main-content">
+                <Routes>
+                    <Route path="/" 
+                        element={
+                            <Home 
+                                wallet={wallet} 
+                                handleDisconnect={handleDisconnect} 
+                                connecting={connecting} 
+                                connect={connect} 
+                            />
+                        } 
+                    />
+                    <Route path="/elections" element={<Elections />} />
+                </Routes>
+            </div>
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
