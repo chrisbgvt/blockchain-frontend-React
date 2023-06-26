@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Web3 Voting App frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend part of a simple Web3 Votting App made in React with TypeScript and Ethers.js
+
+The blockchain part can be found in this repository:  [https://github.com/chrisbgvt/blockchain](https://github.com/chrisbgvt/blockchain)
 
 ## Available Scripts
 
