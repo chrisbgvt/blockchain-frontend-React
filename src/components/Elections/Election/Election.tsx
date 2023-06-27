@@ -26,7 +26,7 @@ const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }
 
     useEffect(() => {
         
-    }, []);
+    }, [contracts, loading, electionId, connectedWallets]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,20 +39,20 @@ const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }
         try {
 			const promises = contracts.map(async (x, index) => {
                 x?.estimateGas.vote(selectedValue, 1).then((_gasCost) => {
-                    console.log(_gasCost.toString());
+                    // console.log(_gasCost.toString());
                     setGasCost(_gasCost.toString());
                 });
 				return await x?.vote(selectedValue, 1);
 			});
 			const results = await Promise.all(promises);
-            setMessage("Success!");
+            showMessage("Success!");
 		} catch (error) {
-            setMessage(handleError(error));
+            showMessage(handleError(error));
 		}
     };
 
     const showMessage = (message: string) => {
-		// setMessage(message);
+		setMessage(message);
 		setTimeout(() => {
 			setMessage("");
 		}, 1000 * 3);
