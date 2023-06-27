@@ -10,7 +10,7 @@ interface NavbarProps {
   onDisconnect: () => void;
 }
 
-const Navbar: FC<NavbarProps> = ({ onDisconnect }) => {
+const Navbar: React.FC<NavbarProps> = ({ onDisconnect }) => {
   const [{ wallet }] = useConnectWallet();
   const connectedWallets = useWallets();
 

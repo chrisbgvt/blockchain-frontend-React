@@ -1,4 +1,4 @@
-import React, { useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import "./SendForm.css";
 import { useWallets } from "@web3-onboard/react";
 
@@ -12,11 +12,11 @@ interface ConnectedWallet {
 const SendForm: React.FC = () => {
     const connectedWallets = useWallets();
 
-    const [sendTo, setSendTo] = React.useState<string>("");
-    const [amount, setAmount] = React.useState<number>(0);
-    const [message, setMessage] = React.useState<string | null>(null);
-    const [balance, setBalance] = React.useState<string>("0");
-    const [gasCost, setGasCost] = React.useState<string>("0");
+    const [sendTo, setSendTo] = useState<string>("");
+    const [amount, setAmount] = useState<number>(0);
+    const [message, setMessage] = useState<string | null>(null);
+    const [balance, setBalance] = useState<string>("0");
+    const [gasCost, setGasCost] = useState<string>("0");
 
     useEffect(() => {
         if (

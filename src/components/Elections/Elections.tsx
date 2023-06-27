@@ -61,7 +61,10 @@ const Elections: React.FC = () => {
 
 	return (
 		<div className="form-wrapper">
-			{electionss.map((x, index) => <Election key={index} nameElection={x.proposals.toString()} endDate={x.endDate.toNumber()} winnerName={x.winnerName.toString()} /> )}
+			{electionss.length > 0 
+				? electionss.map((x, index) => <Election key={index} nameElection={x.proposals.toString()} endDate={x.endDate.toNumber()} winnerName={x.winnerName.toString()} /> )
+				: <h2>No elections yet</h2>
+			}
 			{message && <p>{message}</p>}
 		</div>
 	);

@@ -17,8 +17,8 @@ const Home: React.FC<HomeProps> = ({wallet, handleDisconnect, connecting, connec
                 ? 
                 <>
                     <ChainModal onDisconnect={handleDisconnect} />
-                    <SendForm />
                     <CreateElection />
+                    <SendForm />
                 </>
                 : 
                 <>

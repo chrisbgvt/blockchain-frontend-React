@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import Navbar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Elections from './components/Elections/Elections';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 const rpcUrl = `http://127.0.0.1:8545`;
 
@@ -54,7 +55,7 @@ function App() {
         }
 
         disconnect(wallet).catch((error) => {
-            console.error(error);
+            console.log(error);
         });
     }
 
@@ -74,6 +75,7 @@ function App() {
                         } 
                     />
                     <Route path="/elections" element={<Elections />} />
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </div>
             <Footer />

@@ -45,6 +45,7 @@ const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }
 				return await x?.vote(selectedValue, 1);
 			});
 			const results = await Promise.all(promises);
+            setMessage("Success!");
 		} catch (error) {
             setMessage(handleError(error));
 		}

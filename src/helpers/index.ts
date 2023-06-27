@@ -56,7 +56,7 @@ export function useElectionContract(connectedWallets: any[]): {
                     setContracts(contracts);
                 }
             } catch (error) {
-                console.error('Error fetching contracts:', error);
+                console.log('Error fetching contracts:', error);
             }
         };
 

@@ -8,7 +8,7 @@ interface ChainModalProps {
     onDisconnect: () => void;
 }
 
-const ChainModal: FC<ChainModalProps> = ({ onDisconnect }) => {
+const ChainModal: React.FC<ChainModalProps> = ({ onDisconnect }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [
         {

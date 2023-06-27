@@ -20,7 +20,6 @@ const SendForm: React.FC = () => {
     const [message, setMessage] = useState<string | null>(null);
     const [balance, setBalance] = useState<string>("0");
     const [gasCost, setGasCost] = useState<string>("0");
-    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         if (
@@ -86,7 +85,6 @@ const SendForm: React.FC = () => {
 
             const receipt = await transaction.wait();
             if (receipt.status === 1) {
-                setRefresh(!refresh);
                 showMessage("Success! To vote transfer tokens from creator account to voting account!");
             } else {
                 showMessage("Failed!");
