@@ -41,7 +41,6 @@ const SendForm: React.FC = () => {
         if (!connectedWallets || !sendTo || !amount) return;
         const contract = getContract(connectedWallets);
 
-        console.log(sendTo);
         contract.estimateGas.transfer(sendTo, amount).then((_gasCost) => {
             console.log(_gasCost.toString());
             setGasCost(_gasCost.toString());
@@ -99,6 +98,8 @@ const SendForm: React.FC = () => {
                         placeholder="Contract address"
                         value={sendTo}
                         onChange={handleSendToChange}
+                        pattern="^0x[a-z0-9]*$"
+                        title="Contract address"
                         required
                     />
                 </div>
@@ -110,6 +111,8 @@ const SendForm: React.FC = () => {
                         placeholder="Amount to"
                         value={amount}
                         onChange={handleAmountChange}
+                        min="1"
+                        max="1"
                         required
                     />
                 </div>

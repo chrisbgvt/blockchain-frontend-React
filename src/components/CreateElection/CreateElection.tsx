@@ -121,6 +121,8 @@ const SendForm: React.FC = () => {
                         placeholder="Example - Laptop,PC,Console"
                         value={names}
                         onChange={handleNamesChange}
+                        pattern="^([^,]+,){1,}[^,]+$"
+                        title="Add election participant in that format - name1, name2, etc"
                         required
                     />
                 </div>
