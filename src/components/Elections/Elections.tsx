@@ -43,7 +43,7 @@ const Elections: React.FC = () => {
 					winnerName = handleError(error);
 				}
 	
-				return { proposals, endDate, winnerName };
+				return { x, proposals, endDate, winnerName };
 			});
 			const results = await Promise.all(promises);
 			setElections(results);
@@ -62,7 +62,7 @@ const Elections: React.FC = () => {
 	return (
 		<div className="form-wrapper">
 			{electionss.length > 0 
-				? electionss.map((x, index) => <Election key={index} nameElection={x.proposals.toString()} endDate={x.endDate.toNumber()} winnerName={x.winnerName.toString()} /> )
+				? electionss.map((x, index) => <Election key={index} contract={x.x} nameElection={x.proposals.toString()} endDate={x.endDate.toNumber()} winnerName={x.winnerName.toString()} /> )
 				: <h2>No elections yet</h2>
 			}
 			{message && <p>{message}</p>}

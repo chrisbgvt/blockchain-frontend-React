@@ -10,12 +10,13 @@ interface ConnectedWallet {
 }
 
 interface ElectionProps {
+    contract: any;
     nameElection: string;
     endDate: any;
     winnerName: string;
 }
 
-const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }) => {
+const Election: React.FC<ElectionProps> = ({ contract, nameElection, endDate, winnerName }) => {
     const connectedWallets = useWallets();
     const [selectedValue, setSelectedValue] = useState("");
     const [message, setMessage] = useState<string>("");
@@ -37,14 +38,11 @@ const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }
         e.preventDefault();
 
         try {
-			const promises = contracts.map(async (x, index) => {
-                x?.estimateGas.vote(selectedValue, 1).then((_gasCost) => {
-                    // console.log(_gasCost.toString());
-                    setGasCost(_gasCost.toString());
-                });
-				return await x?.vote(selectedValue, 1);
-			});
-			const results = await Promise.all(promises);
+            contract.estimateGas.vote(selectedValue, 1).then((_gasCost: string) => {
+                // console.log(_gasCost.toString());
+                setGasCost(_gasCost.toString());
+            });
+            await contract.vote(selectedValue, 1);
             showMessage("Success!");
 		} catch (error) {
             showMessage(handleError(error));
@@ -69,8 +67,9 @@ const Election: React.FC<ElectionProps> = ({ nameElection, endDate, winnerName }
                         </div>
                     );
                 })}
-                {message && <p>{message}</p>}
+                <label>Network Fee: {gasCost} WEI</label>
                 {Date.now() > endDate ? <p>Winner: {winnerName}</p> : <button type="submit">Vote</button>}
+                {message && <p>{message}</p>}
             </form>
         </div>
     );
