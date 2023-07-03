@@ -98,7 +98,7 @@ const SendForm: React.FC = () => {
                         placeholder="Contract address"
                         value={sendTo}
                         onChange={handleSendToChange}
-                        pattern="^0x[a-z0-9]*$"
+                        pattern="^0x[0-9a-zA-Z]*$"
                         title="Contract address"
                         required
                     />
