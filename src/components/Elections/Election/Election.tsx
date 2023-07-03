@@ -20,14 +20,13 @@ const Election: React.FC<ElectionProps> = ({ contract, nameElection, endDate, wi
     const connectedWallets = useWallets();
     const [selectedValue, setSelectedValue] = useState("");
     const [message, setMessage] = useState<string>("");
-    const { contracts, loading, electionId } = useElectionContract(connectedWallets);
     const onlyNames = nameElection.split(',').filter(item => isNaN(Number(item))).join(',');
     const [...names] = onlyNames.split(',');
     const [gasCost, setGasCost] = useState<string>("0");
 
     useEffect(() => {
         
-    }, [contracts, loading, electionId, connectedWallets]);
+    }, [connectedWallets]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
